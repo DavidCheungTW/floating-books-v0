@@ -21,9 +21,9 @@ const ContactUsPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Handle form submission, e.g., send an email or save the message
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Message:", message);
+    // console.log("Name:", name);
+    // console.log("Email:", email);
+    // console.log("Message:", message);
     // Reset form fields
     setName("");
     setEmail("");

@@ -43,7 +43,7 @@ const NavBar = () => {
       setUserDetails(JSON.parse(storedLoginDetails));
     } else {
       setIsUserLogged(false);
-      navigate("/login");
+      // navigate("/login");
     }
   }, []);
 

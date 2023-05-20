@@ -24,7 +24,12 @@ export const Register = async ({
   formData.postalAddress = postalAddress;
   formData.email = email;
 
-  const endpoint = "http://localhost:4000/users";
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/users`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/users`;
+  }
+
   try {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
@@ -86,7 +91,12 @@ export const GetUserDetails = async (userData, setUserDetails) => {
   formData.userName = userName;
 
   if (data?.providerData) {
-    const endpoint = "http://localhost:4000/users/search";
+    const host = window.location.hostname;
+    let endpoint = `http://${host}:4000/users/search`;
+    if (process.env.REACT_APP_BASE_URL) {
+      endpoint = `${process.env.REACT_APP_BASE_URL}/users/search`;
+    }
+
     try {
       return await axios.post(endpoint, formData).then((res) => {
         setUserDetails(...res.data);

@@ -20,7 +20,7 @@ export class FormUserDetails extends Component {
       } else {
         if (key === "email") {
           if (this.validateEmail(this.props.values[key])) {
-            console.log("hit");
+            // console.log("hit");
             newErrors[key] = "Invalid email address";
           }
         } else {

@@ -31,7 +31,11 @@ export const AddBook = async (
     formData.append("image", "");
   }
 
-  const endpoint = "http://localhost:4000/books";
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/books`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/books`;
+  }
 
   try {
     const token = userData.stsTokenManager.accessToken;
@@ -43,7 +47,11 @@ export const AddBook = async (
 };
 
 export const GetRecentlyAddedBooks = async (setBooksData, setFilteredData) => {
-  const endpoint = "http://localhost:4000/books";
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/books`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/books`;
+  }
 
   try {
     const result = await axios.get(endpoint);
@@ -62,7 +70,11 @@ export const AddFavouriteBook = async (bookId, userId, createDate) => {
   formData.userId = userId;
   formData.createDate = createDate;
 
-  const endpoint = "http://localhost:4000/favourites";
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/favourites`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/favourites`;
+  }
 
   try {
     return await axios.post(endpoint, formData);
@@ -72,7 +84,11 @@ export const AddFavouriteBook = async (bookId, userId, createDate) => {
 };
 
 export const GetFavouriteBook = async (userId, setFavouriteBooks) => {
-  const endpoint = "http://localhost:4000/favourites/search";
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/favourites/search`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/favourites/search`;
+  }
 
   try {
     const formData = {};
@@ -91,7 +107,11 @@ export const GetFavouriteBook = async (userId, setFavouriteBooks) => {
 };
 
 export const DeleteFavouriteBook = async (favouriteId) => {
-  const endpoint = `http://localhost:4000/favourites/${favouriteId}`;
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/favourites/${favouriteId}`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/favourites/${favouriteId}`;
+  }
 
   try {
     return await axios.delete(endpoint);
@@ -106,16 +126,20 @@ export const AddOrderBook = async (bookId, userId, createDate, userData) => {
   formData.userId = userId;
   formData.orderDate = createDate;
 
-  const endpoint = "http://localhost:4000/orders";
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/orders`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/orders`;
+  }
 
   try {
     const token = JSON.parse(userData).stsTokenManager.accessToken;
     axios.defaults.headers.post["Authorization"] = `Bearer ${token}`;
     return await axios.post(endpoint, formData).catch((error) => {
       if (error.response) {
-        console.log(error.response.data);
-        console.log(error.response.status);
-        console.log(error.response.headers);
+        console.error(error.response.data);
+        console.error(error.response.status);
+        console.error(error.response.headers);
       } else {
         console.error("Error:", error);
       }
@@ -126,7 +150,11 @@ export const AddOrderBook = async (bookId, userId, createDate, userData) => {
 };
 
 export const GetOrderBooks = async (setOrderBooks, setErrorMessage) => {
-  const endpoint = "http://localhost:4000/orders";
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/orders`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/orders`;
+  }
 
   return axios
     .get(endpoint)
@@ -145,7 +173,11 @@ export const GetOrderBooks = async (setOrderBooks, setErrorMessage) => {
 };
 
 export const UpdateOrder = async (orderId, newStatus, setErrorMessage) => {
-  const endpoint = `http://localhost:4000/orders/${orderId}`;
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/orders/${orderId}`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/orders/${orderId}`;
+  }
 
   const formData = {};
   formData.status = newStatus;
@@ -177,7 +209,11 @@ export const UpdateOrder = async (orderId, newStatus, setErrorMessage) => {
 };
 
 export const UpdateBook = (bookId, userId, setErrorMessage) => {
-  const endpoint = `http://localhost:4000/books/${bookId}`;
+  const host = window.location.hostname;
+  let endpoint = `http://${host}:4000/books/${bookId}`;
+  if (process.env.REACT_APP_BASE_URL) {
+    endpoint = `${process.env.REACT_APP_BASE_URL}/books/${bookId}`;
+  }
 
   const formData = {};
   formData.ownerId = userId;
