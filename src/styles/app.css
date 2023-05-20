@@ -1,0 +1,15 @@
+.App-header {
+  background-color: #d6dddd;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(65, 52, 19);
+}
+
+body {
+  min-height: 400px;
+  margin-bottom: 100px;
+  clear: both;
+}
